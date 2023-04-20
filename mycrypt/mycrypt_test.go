@@ -30,20 +30,20 @@ func TestKrypter(t *testing.T) {
 }
 
 // Posisjonene i alfabetet begynner på 0 fra venstre og teller oppover mot høyre
-/**func TestSokIAlfabetet(t *testing.T) {
-    type test struct {
-        input rune
-        want  int
-    }
-    tests := []test{
-        {input: 'æ', want: 26},
-        {input: 'a', want: 0},
-    }
+func TestSokIAlfabetet(t *testing.T) {
+	type test struct {
+		input rune
+		want  int
+	}
+	tests := []test{
+		{input: 'æ', want: 26},
+		{input: 'a', want: 0},
+	}
 
-    for _, tc := range tests {
-        got := sokIAlfabetet(tc.input, ALF_SEM03)
-        if got != tc.want {
-            t.Errorf("Feil, fikk %d, ønsket %d.", got, tc.want)
-        }
-    }
-}*/
+	for _, tc := range tests {
+		got := sokIAlfabetet(tc.input, ALF_SEM03)
+		if got != tc.want {
+			t.Errorf("Feil, fikk %d, ønsket %d.", got, tc.want)
+		}
+	}
+}
