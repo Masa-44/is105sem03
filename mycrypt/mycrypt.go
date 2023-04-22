@@ -1,36 +1,34 @@
 package mycrypt
 
-var ALF_SEM03 []rune = []rune("abcdefghijklmnopqrstuvwxyzæøå0123456789ABCDEFGHIJKLMONPQRSTUWXYZÆØÅ.,:; ")
+var ALF_SEM03 []rune = []rune("abcdefghijklmnopqrstuvwxyz      0123456789ABCDEFGHIJKLMONPQRSTUWXYZ ^f ^x ^e.,:; ")
 
-func Krypter(melding []rune, alphabet []rune, chiffer int) []rune {
+func Dekrypter(melding []rune, alphabet []rune, chiffer int) []rune {
+        modCipher := chiffer % len(ALF_SEM03)
+        shiftedAlphabet := shiftAlphabet(ALF_SEM03, -modCipher) // Reverse the direction of shift
 
-	modCipher := chiffer % len(ALF_SEM03)
+        lookup := make(map[rune]rune)
 
-	shiftedAlphabet := shiftAlphabet(ALF_SEM03, modCipher)
+        for i := 0; i < len(ALF_SEM03); i++ {
+                lookup[shiftedAlphabet[i]] = ALF_SEM03[i] // Reverse the lookup map
+        }
 
-	lookup := make(map[rune]rune)
-
-	for i := 0; i < len(ALF_SEM03); i++ {
-		lookup[ALF_SEM03[i]] = shiftedAlphabet[i]
-	}
-
-	kryptertMelding := make([]rune, len(melding))
-	for i := 0; i < len(melding); i++ {
-		kryptertMelding[i] = lookup[melding[i]]
-	}
-	return kryptertMelding
+        dekryptertMelding := make([]rune, len(melding))
+        for i := 0; i < len(melding); i++ {
+                dekryptertMelding[i] = lookup[melding[i]]
+        }
+        return dekryptertMelding
 }
 
 func shiftAlphabet(alphabet []rune, chiffer int) []rune {
-	return append(alphabet[chiffer:], alphabet[:chiffer]...)
+        return append(alphabet[chiffer:], alphabet[:chiffer]...)
 }
 
 func sokIAlfabetet(symbol rune, alfabet []rune) int {
-	for i := 0; i < len(alfabet); i++ {
-		if symbol == alfabet[i] {
-			return i
-			break
-		}
-	}
-	return -1
+        for i := 0; i < len(alfabet); i++ {
+                if symbol == alfabet[i] {
+                        return i
+                        break
+                }
+        }
+        return -1
 }
